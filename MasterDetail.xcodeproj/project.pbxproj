@@ -11,6 +11,8 @@
 		7CF226EC1E33E15B00D38A76 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF226EB1E33E15B00D38A76 /* main.m */; };
 		7CF226EE1E33E15B00D38A76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CF226ED1E33E15B00D38A76 /* Assets.xcassets */; };
 		7CF226F11E33E15B00D38A76 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CF226EF1E33E15B00D38A76 /* MainMenu.xib */; };
+		7CF85A811E35ACB40094C296 /* ProductData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF85A801E35ACB40094C296 /* ProductData.m */; };
+		7CF85A841E35AD6E0094C296 /* ProductListData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF85A831E35AD6E0094C296 /* ProductListData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +23,10 @@
 		7CF226ED1E33E15B00D38A76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7CF226F01E33E15B00D38A76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		7CF226F21E33E15B00D38A76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7CF85A7F1E35ACB40094C296 /* ProductData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductData.h; path = Model/ProductData.h; sourceTree = "<group>"; };
+		7CF85A801E35ACB40094C296 /* ProductData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductData.m; path = Model/ProductData.m; sourceTree = "<group>"; };
+		7CF85A821E35AD6E0094C296 /* ProductListData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductListData.h; path = Model/ProductListData.h; sourceTree = "<group>"; };
+		7CF85A831E35AD6E0094C296 /* ProductListData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductListData.m; path = Model/ProductListData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +61,7 @@
 			children = (
 				7CF226E71E33E15B00D38A76 /* AppDelegate.h */,
 				7CF226E81E33E15B00D38A76 /* AppDelegate.m */,
+				7CF85A7E1E35AC980094C296 /* Model */,
 				7CF226ED1E33E15B00D38A76 /* Assets.xcassets */,
 				7CF226EF1E33E15B00D38A76 /* MainMenu.xib */,
 				7CF226F21E33E15B00D38A76 /* Info.plist */,
@@ -69,6 +76,17 @@
 				7CF226EB1E33E15B00D38A76 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7CF85A7E1E35AC980094C296 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7CF85A7F1E35ACB40094C296 /* ProductData.h */,
+				7CF85A801E35ACB40094C296 /* ProductData.m */,
+				7CF85A821E35AD6E0094C296 /* ProductListData.h */,
+				7CF85A831E35AD6E0094C296 /* ProductListData.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,6 +162,8 @@
 			files = (
 				7CF226EC1E33E15B00D38A76 /* main.m in Sources */,
 				7CF226E91E33E15B00D38A76 /* AppDelegate.m in Sources */,
+				7CF85A811E35ACB40094C296 /* ProductData.m in Sources */,
+				7CF85A841E35AD6E0094C296 /* ProductListData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +313,7 @@
 				7CF226F71E33E15B00D38A76 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
