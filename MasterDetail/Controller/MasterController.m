@@ -39,4 +39,42 @@
     return cellView;
 }
 
+- (void)tableViewSelectionDidChange:(NSNotification *)notification {
+    NSInteger selectedRow = [self.tableView selectedRow];
+    if (selectedRow > -1) {
+        ProductData *product = [self.productList objectInProductsAtIndex:selectedRow];
+        NSLog(@"Selected product: %@", product.name);
+    } else {
+        NSLog(@"No selection");
+    }
+}
+
+- (void)awakeFromNib {
+    [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];
+}
+
+- (IBAction)insertNewProduct:(id)sender {
+    // create the new product data
+    ProductData *product = [[ProductData alloc] initWithName:@"New Product" price:[NSDecimalNumber decimalNumberWithString:@"1.99"]];
+    
+    // figure out the index to insert into (TODO)
+    NSInteger index = self.tableView.selectedRow;
+    if (index == -1) {
+        // no selection, so insert at top of list
+        index = 0;
+    }
+    
+    // insert it into the model layer
+    [self.productList insertObject:product inProductsAtIndex:index];
+    
+    // tell the table view it needs updating
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:index] withAnimation:NSTableViewAnimationSlideDown];
+    [self.tableView scrollRowToVisible:index];
+    [self.tableView endUpdates];
+    
+    // select the new row
+    [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
+}
+
 @end
