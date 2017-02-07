@@ -16,5 +16,6 @@
 @property (weak) IBOutlet NSTableView *tableView;
 
 - (IBAction)insertNewProduct:(id)sender;
+- (IBAction)removeSelectedProduct:(id)sender;
 
 @end

@@ -52,6 +52,8 @@
 
 - (void)awakeFromNib {
     [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];
+    
+    [self.productList addObserver:self forKeyPath:@"products" options:0 context:NULL];
 }
 
 - (IBAction)insertNewProduct:(id)sender {
@@ -76,6 +78,51 @@
     
     // select the new row
     [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
+}
+
+- (IBAction)removeSelectedProduct:(id)sender {
+    NSInteger index = self.tableView.selectedRow;
+    if (index == -1) {
+        // no selection, leave as is
+        return;
+    }
+    [self.productList removeObjectFromProductsAtIndex:index];
+    
+    // update the table view to match
+    [self.tableView beginUpdates];
+    [self.tableView removeRowsAtIndexes:[NSIndexSet indexSetWithIndex:index] withAnimation:NSTableViewAnimationEffectFade];
+    [self.tableView scrollRowToVisible:index];
+    [self.tableView endUpdates];
+    
+    // select a new row, if there are any left
+    if ([self.productList countOfProducts] > 0) {
+        NSInteger newIndex = index - 1;
+        if (newIndex < 0) {
+            newIndex = 0;
+        }
+        [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:newIndex] byExtendingSelection:NO];
+    }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if (object == self.productList) {
+        if ([keyPath isEqualToString:@"products"]) {
+            
+            // figure out what kind of change occurred
+            NSNumber *changeTypeAsNumber = change[NSKeyValueChangeKindKey];
+            NSKeyValueChange changeType = [changeTypeAsNumber intValue];
+            
+            if (changeType == NSKeyValueChangeSetting) {
+                NSLog(@"Set a new value");  // not applicable for our example
+            } else if (changeType == NSKeyValueChangeInsertion) {
+                NSLog(@"Inserted product");
+            } else if (changeType == NSKeyValueChangeRemoval) {
+                NSLog(@"Removed a product");
+            } else if (changeType == NSKeyValueChangeReplacement) {
+                NSLog(@"Replaced a product");   // not applicable for our example
+            }
+        }
+    }
 }
 
 @end
