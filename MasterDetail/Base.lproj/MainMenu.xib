@@ -12,7 +12,11 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="94d-yg-EF2" customClass="MasterController"/>
+        <customObject id="94d-yg-EF2" customClass="MasterController">
+            <connections>
+                <outlet property="tableView" destination="MkW-W9-bnv" id="z8E-mx-aoJ"/>
+            </connections>
+        </customObject>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
