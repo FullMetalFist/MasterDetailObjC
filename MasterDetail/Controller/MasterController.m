@@ -70,12 +70,7 @@
     // insert it into the model layer
     [self.productList insertObject:product inProductsAtIndex:index];
     
-    // tell the table view it needs updating
-    [self.tableView beginUpdates];
-    [self.tableView insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:index] withAnimation:NSTableViewAnimationSlideDown];
-    [self.tableView scrollRowToVisible:index];
-    [self.tableView endUpdates];
-    
+    // (removed table view updating code)
     // select the new row
     [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
 }
@@ -88,11 +83,7 @@
     }
     [self.productList removeObjectFromProductsAtIndex:index];
     
-    // update the table view to match
-    [self.tableView beginUpdates];
-    [self.tableView removeRowsAtIndexes:[NSIndexSet indexSetWithIndex:index] withAnimation:NSTableViewAnimationEffectFade];
-    [self.tableView scrollRowToVisible:index];
-    [self.tableView endUpdates];
+    // (removed table view updating code)
     
     // select a new row, if there are any left
     if ([self.productList countOfProducts] > 0) {
@@ -112,14 +103,21 @@
             NSNumber *changeTypeAsNumber = change[NSKeyValueChangeKindKey];
             NSKeyValueChange changeType = [changeTypeAsNumber intValue];
             
-            if (changeType == NSKeyValueChangeSetting) {
-                NSLog(@"Set a new value");  // not applicable for our example
-            } else if (changeType == NSKeyValueChangeInsertion) {
-                NSLog(@"Inserted product");
+            NSIndexSet *indexes = change[NSKeyValueChangeIndexesKey];
+            NSInteger index = [indexes firstIndex];
+            
+            if (changeType == NSKeyValueChangeInsertion) {
+                // update the table view to match
+                [self.tableView beginUpdates];
+                [self.tableView insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:index] withAnimation:NSTableViewAnimationSlideDown];
+                [self.tableView scrollRowToVisible:index];
+                [self.tableView endUpdates];
             } else if (changeType == NSKeyValueChangeRemoval) {
-                NSLog(@"Removed a product");
-            } else if (changeType == NSKeyValueChangeReplacement) {
-                NSLog(@"Replaced a product");   // not applicable for our example
+                // update the table view to match
+                [self.tableView beginUpdates];
+                [self.tableView removeRowsAtIndexes:[NSIndexSet indexSetWithIndex:index] withAnimation:NSTableViewAnimationEffectFade];
+                [self.tableView scrollRowToVisible:index];
+                [self.tableView endUpdates];
             }
         }
     }
