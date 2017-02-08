@@ -8,12 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 #import "ProductListData.h"
+#import "DetailController.h"
 
 @interface MasterController : NSObject <NSTableViewDataSource, NSTableViewDelegate>
 
 @property (nonatomic) ProductListData *productList;
 
 @property (weak) IBOutlet NSTableView *tableView;
+@property (weak) IBOutlet DetailController *detailController;
 
 - (IBAction)insertNewProduct:(id)sender;
 - (IBAction)removeSelectedProduct:(id)sender;

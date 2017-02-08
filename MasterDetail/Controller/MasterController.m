@@ -40,13 +40,10 @@
 }
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification {
-    NSInteger selectedRow = [self.tableView selectedRow];
-    NSLog(@"Selected Row: %li", (long)selectedRow);
-    if (selectedRow > -1) {
-        ProductData *product = [self.productList objectInProductsAtIndex:selectedRow];
-        NSLog(@"Selected product: %@", product.name);
+    if (self.tableView.selectedRow > -1) {
+        self.detailController.product = [self.productList objectInProductsAtIndex:self.tableView.selectedRow];
     } else {
-        NSLog(@"No selection");
+        self.detailController.product = nil;
     }
 }
 

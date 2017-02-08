@@ -14,6 +14,7 @@
 		7CF85A811E35ACB40094C296 /* ProductData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF85A801E35ACB40094C296 /* ProductData.m */; };
 		7CF85A841E35AD6E0094C296 /* ProductListData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF85A831E35AD6E0094C296 /* ProductListData.m */; };
 		7CF85A881E3789840094C296 /* MasterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF85A871E3789840094C296 /* MasterController.m */; };
+		7CFDBFE01E4B79F90098A918 /* DetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFDBFDF1E4B79F90098A918 /* DetailController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,8 @@
 		7CF85A831E35AD6E0094C296 /* ProductListData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductListData.m; path = Model/ProductListData.m; sourceTree = "<group>"; };
 		7CF85A861E3789840094C296 /* MasterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MasterController.h; path = Controller/MasterController.h; sourceTree = "<group>"; };
 		7CF85A871E3789840094C296 /* MasterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MasterController.m; path = Controller/MasterController.m; sourceTree = "<group>"; };
+		7CFDBFDE1E4B79F90098A918 /* DetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailController.h; path = Controller/DetailController.h; sourceTree = "<group>"; };
+		7CFDBFDF1E4B79F90098A918 /* DetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailController.m; path = Controller/DetailController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +101,8 @@
 			children = (
 				7CF85A861E3789840094C296 /* MasterController.h */,
 				7CF85A871E3789840094C296 /* MasterController.m */,
+				7CFDBFDE1E4B79F90098A918 /* DetailController.h */,
+				7CFDBFDF1E4B79F90098A918 /* DetailController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -175,6 +180,7 @@
 			files = (
 				7CF226EC1E33E15B00D38A76 /* main.m in Sources */,
 				7CF226E91E33E15B00D38A76 /* AppDelegate.m in Sources */,
+				7CFDBFE01E4B79F90098A918 /* DetailController.m in Sources */,
 				7CF85A811E35ACB40094C296 /* ProductData.m in Sources */,
 				7CF85A881E3789840094C296 /* MasterController.m in Sources */,
 				7CF85A841E35AD6E0094C296 /* ProductListData.m in Sources */,

@@ -14,10 +14,12 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="94d-yg-EF2" customClass="MasterController">
             <connections>
+                <outlet property="detailController" destination="HFc-Pd-N39" id="b37-OK-GRI"/>
                 <outlet property="tableView" destination="MkW-W9-bnv" id="z8E-mx-aoJ"/>
             </connections>
         </customObject>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customObject id="HFc-Pd-N39" customClass="DetailController"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
@@ -765,6 +767,9 @@
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="removeSelectedProduct:" target="94d-yg-EF2" id="ag5-Ww-9Ti"/>
+                        </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gmq-aH-FJn">
                         <rect key="frame" x="79" y="-1" width="80" height="20"/>
