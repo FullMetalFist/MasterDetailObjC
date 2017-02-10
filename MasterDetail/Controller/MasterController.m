@@ -137,4 +137,36 @@
     }
 }
 
+- (void)saveSelectionToUserDefaults {
+    // get the current selection index
+    NSInteger currentSelection = [self.tableView selectedRow];
+    
+    // save it with user defaults
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setInteger:currentSelection forKey:@"initalSelection"];
+    
+    NSLog(@"Saved selected row %li", currentSelection);
+}
+
+- (void)saveProductsToFile:(NSString *)path {
+    // turn the products into an array of dictionaries
+    NSMutableArray *productsArray = [NSMutableArray array];
+    for (NSInteger i = 0; i < [self.productList countOfProducts]; i += 1) {
+        ProductData *product = [self.productList objectInProductsAtIndex:i];
+        NSMutableDictionary *productInfo = [NSMutableDictionary dictionary];
+        productInfo[@"name"] = product.name;
+        productInfo[@"price"] = product.price;
+        if (product.image != nil) {
+            productInfo[@"image"] = product.image;
+        }
+        productInfo[@"numberOfSales"] = [NSNumber numberWithInteger:product.numberOfSales];
+        [productsArray addObject:productInfo];
+    }
+    
+    // save the array to the specified file
+    [productsArray writeToFile:path atomically:YES];
+    
+    NSLog(@"Saved products: %@\nTo file: %@", productsArray, path);
+}
+
 @end

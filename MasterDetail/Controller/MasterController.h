@@ -20,4 +20,8 @@
 - (IBAction)insertNewProduct:(id)sender;
 - (IBAction)removeSelectedProduct:(id)sender;
 
+- (void)saveSelectionToUserDefaults;
+
+- (void)saveProductsToFile:(NSString *)path;
+
 @end

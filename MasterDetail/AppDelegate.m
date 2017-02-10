@@ -22,6 +22,8 @@
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
+    [self.masterController saveProductsToFile:@"/Users/mvilabrera/Developer/Rypress/MasterDetail/product-data.plist"];
+    [self.masterController saveSelectionToUserDefaults];
 }
 
 
