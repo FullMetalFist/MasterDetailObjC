@@ -40,8 +40,18 @@
 }
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification {
+    // stop observing the old selected product's name
+    if (self.detailController.product != nil) {
+        [self.detailController.product removeObserver:self forKeyPath:@"name"];
+    }
+    
     if (self.tableView.selectedRow > -1) {
         self.detailController.product = [self.productList objectInProductsAtIndex:self.tableView.selectedRow];
+        
+        // start observing the new selected product's name
+        if (self.detailController.product != nil) {
+            [self.detailController.product addObserver:self forKeyPath:@"name" options:0 context:NULL];
+        }
     } else {
         self.detailController.product = nil;
     }
@@ -117,6 +127,13 @@
                 [self.tableView endUpdates];
             }
         }
+    }
+    
+    if ([object isKindOfClass:[ProductData class]] && [keyPath isEqualToString:@"name"]) {
+        // the selected product's name changed, so refresh the row in the table
+        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:[self.productList indexOfObjectInProducts:object]];
+        NSIndexSet *columnSet = [NSIndexSet indexSetWithIndex:0];
+        [self.tableView reloadDataForRowIndexes:indexSet columnIndexes:columnSet];
     }
 }
 
