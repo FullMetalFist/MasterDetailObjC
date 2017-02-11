@@ -148,6 +148,17 @@
     NSLog(@"Saved selected row %li", currentSelection);
 }
 
+- (void)loadSelectionFromUserDefaults {
+    // load the initial selection from NSUserDefaults
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSInteger initialSelection = [defaults integerForKey:@"initialSelection"];
+    
+    // update table view to match
+    [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:initialSelection] byExtendingSelection:NO];
+    
+    NSLog(@"Loaded selected row %li", initialSelection);
+}
+
 - (void)saveProductsToFile:(NSString *)path {
     // turn the products into an array of dictionaries
     NSMutableArray *productsArray = [NSMutableArray array];
@@ -167,6 +178,36 @@
     [productsArray writeToFile:path atomically:YES];
     
     NSLog(@"Saved products: %@\nTo file: %@", productsArray, path);
+}
+
+- (void)loadProductsFromFile:(NSString *)path {
+    // start with a fresh ProductListData
+    [self.productList removeObserver:self forKeyPath:@"products"];
+    self.productList = [[ProductListData alloc] init];
+    [self.productList addObserver:self forKeyPath:@"products" options:0 context:NULL];
+    
+    // load the array of dictionaries
+    NSArray *productsAsArray = [NSArray arrayWithContentsOfFile:path];
+    
+    // turn the array of dictionaries into products
+    for (NSInteger i = 0; i < [productsAsArray count]; i += 1) {
+        NSDictionary *productInfo = productsAsArray[i];
+        
+        NSString *name = productInfo[@"name"];
+        NSDecimalNumber *price = productInfo[@"price"];
+        NSImage *image = productInfo[@"image"];
+        NSInteger numberOfSales = [productInfo[@"numberOfSales"] integerValue];
+        
+        ProductData *product = [[ProductData alloc] initWithName:name price:price];
+        product.image = image;
+        product.numberOfSales = numberOfSales;
+        
+        [self.productList insertObject:product inProductsAtIndex:i];
+    }
+    
+    [self.tableView reloadData];
+    
+    NSLog(@"Loaded products: %@\nFrom file: %@", productsAsArray, path);
 }
 
 @end

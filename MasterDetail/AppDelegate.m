@@ -17,6 +17,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
+    [self.masterController loadProductsFromFile:@"/Users/mvilabrera/Developer/Rypress/MasterDetail/product-data.plist"];
+    [self.masterController loadSelectionFromUserDefaults];
 }
 
 

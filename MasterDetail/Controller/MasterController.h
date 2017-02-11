@@ -21,7 +21,9 @@
 - (IBAction)removeSelectedProduct:(id)sender;
 
 - (void)saveSelectionToUserDefaults;
+- (void)loadSelectionFromUserDefaults;
 
 - (void)saveProductsToFile:(NSString *)path;
+- (void)loadProductsFromFile:(NSString *)path;
 
 @end
