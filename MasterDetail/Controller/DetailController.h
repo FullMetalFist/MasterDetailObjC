@@ -25,4 +25,6 @@
 - (IBAction)changeImage:(id)sender;
 - (IBAction)makeSale:(id)sender;
 
+- (IBAction)selectImageWithPanel:(id)sender;
+
 @end

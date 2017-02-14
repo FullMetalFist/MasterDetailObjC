@@ -77,4 +77,23 @@
     [self synchronizeWithData];
 }
 
+- (IBAction)selectImageWithPanel:(id)sender {
+    // configure the panel
+    NSOpenPanel *panel = [NSOpenPanel openPanel];
+    
+    // show the panel
+    [panel beginWithCompletionHandler:^(NSInteger result) {
+        if (result == NSFileHandlingPanelOKButton) {
+            NSURL *imageURL = [[panel URLs] objectAtIndex:0];
+            NSImage *image = [[NSImage alloc] initWithContentsOfURL:imageURL];
+            if (image != nil) {
+                self.product.image = image;
+                [self synchronizeWithData];
+            } else {
+                NSLog(@"Error loading image: %@", imageURL);
+            }
+        }
+    }];
+}
+
 @end
