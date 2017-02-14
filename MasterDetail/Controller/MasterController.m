@@ -160,54 +160,38 @@
 }
 
 - (void)saveProductsToFile:(NSString *)path {
-    // turn the products into an array of dictionaries
-    NSMutableArray *productsArray = [NSMutableArray array];
-    for (NSInteger i = 0; i < [self.productList countOfProducts]; i += 1) {
-        ProductData *product = [self.productList objectInProductsAtIndex:i];
-        NSMutableDictionary *productInfo = [NSMutableDictionary dictionary];
-        productInfo[@"name"] = product.name;
-        productInfo[@"price"] = product.price;
-        if (product.image != nil) {
-            productInfo[@"image"] = product.image;
-        }
-        productInfo[@"numberOfSales"] = [NSNumber numberWithInteger:product.numberOfSales];
-        [productsArray addObject:productInfo];
-    }
+    // archive the model as an NSData object
+    NSData *archivedProducts = [NSKeyedArchiver archivedDataWithRootObject:self.productList];
     
-    // save the array to the specified file
-    [productsArray writeToFile:path atomically:YES];
+    // save the NSData object
+    [archivedProducts writeToFile:path atomically:YES];
     
-    NSLog(@"Saved products: %@\nTo file: %@", productsArray, path);
+    NSLog(@"Saved products %@\nTo file: %@", self.productList, path);
 }
 
 - (void)loadProductsFromFile:(NSString *)path {
-    // start with a fresh ProductListData
+    // stop observing the current ProductListData
     [self.productList removeObserver:self forKeyPath:@"products"];
-    self.productList = [[ProductListData alloc] init];
-    [self.productList addObserver:self forKeyPath:@"products" options:0 context:NULL];
     
-    // load the array of dictionaries
-    NSArray *productsAsArray = [NSArray arrayWithContentsOfFile:path];
+    // load the NSData object
+    NSData *archivedProducts = [NSData dataWithContentsOfFile:path];
     
-    // turn the array of dictionaries into products
-    for (NSInteger i = 0; i < [productsAsArray count]; i += 1) {
-        NSDictionary *productInfo = productsAsArray[i];
-        
-        NSString *name = productInfo[@"name"];
-        NSDecimalNumber *price = productInfo[@"price"];
-        NSImage *image = productInfo[@"image"];
-        NSInteger numberOfSales = [productInfo[@"numberOfSales"] integerValue];
-        
-        ProductData *product = [[ProductData alloc] initWithName:name price:price];
-        product.image = image;
-        product.numberOfSales = numberOfSales;
-        
-        [self.productList insertObject:product inProductsAtIndex:i];
+    if (archivedProducts == nil) {
+        // there are no saved products
+        self.productList = [[ProductListData alloc] init];
+        NSLog(@"No saved products");
+    } else {
+        // unarchive the model
+        ProductListData *productList = [NSKeyedUnarchiver unarchiveObjectWithData:archivedProducts];
+        self.productList = productList;
+        NSLog(@"Loaded products : %@\nFrom file: %@", productList, path);
     }
     
-    [self.tableView reloadData];
+    // start observing the new ProductListData
+    [self.productList addObserver:self forKeyPath:@"products" options:0 context:NULL];
     
-    NSLog(@"Loaded products: %@\nFrom file: %@", productsAsArray, path);
+    // update the tableview
+    [self.tableView reloadData];
 }
 
 @end

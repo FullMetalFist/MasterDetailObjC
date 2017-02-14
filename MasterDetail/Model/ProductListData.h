@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ProductData.h"
 
-@interface ProductListData : NSObject
+@interface ProductListData : NSObject <NSCoding>
 
 // KVO-enabling methods
 - (NSUInteger)countOfProducts;

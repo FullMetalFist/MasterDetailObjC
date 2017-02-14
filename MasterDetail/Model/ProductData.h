@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ProductData : NSObject
+@interface ProductData : NSObject <NSCoding>
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSDecimalNumber *price;

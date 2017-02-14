@@ -20,6 +20,14 @@
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        _products = [aDecoder decodeObjectForKey:@"products"];
+    }
+    return self;
+}
+
 - (NSUInteger)countOfProducts {
     return [_products count];
 }
@@ -38,6 +46,10 @@
 
 - (NSInteger)indexOfObjectInProducts:(id)product {
     return [_products indexOfObject:product];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:_products forKey:@"products"];
 }
 
 @end

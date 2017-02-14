@@ -19,4 +19,22 @@
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        _name = [aDecoder decodeObjectForKey:@"name"];
+        _price = [aDecoder decodeObjectForKey:@"price"];
+        _numberOfSales = [aDecoder decodeIntegerForKey:@"numberOfSales"];
+        _image = [aDecoder decodeObjectForKey:@"image"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.name forKey:@"name"];
+    [aCoder encodeObject:self.price forKey:@"price"];
+    [aCoder encodeInteger:self.numberOfSales forKey:@"numberOfSales"];
+    [aCoder encodeObject:self.image forKey:@"image"];
+}
+
 @end
